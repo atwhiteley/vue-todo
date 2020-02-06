@@ -1,3 +1,4 @@
+<!-- Todo list implemented via global store - no business logic in this component -->
 <template>
   <v-container class="todo-list">
     <v-row>

@@ -37,12 +37,16 @@
       </v-btn>
     </v-app-bar>
     <v-content>
-      <v-row>
-        <v-col cols="4">
-          <!-- Uses VueX -->
+      <v-row dense>
+        <v-col cols="auto">
+          <!-- Uses VueX as source of truth -->
+          <TodoGrouped :myTodos="myTodos" />
+        </v-col>
+        <v-col>
+          <!-- Uses VueX as source of truth -->
           <TodoList :myTodos="myTodos" />
         </v-col>
-        <v-col cols="5">
+        <v-col>
           <!-- Designed as a standalone - give it a model and listen to the events -->
           <TodoListStandAlone 
             :myTodos="todos" 
@@ -50,10 +54,6 @@
             @add-todo="todos.push($event)"
             @remove-todo="todos.splice($event, 1)"
           />
-        </v-col>
-        <v-col cols="3">
-          <!-- Also uses VueX as source of truth -->
-          <TodoGrouped :myTodos="myTodos" />
         </v-col>
       </v-row>
     </v-content>

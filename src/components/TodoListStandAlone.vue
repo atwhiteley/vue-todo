@@ -1,3 +1,4 @@
+<!-- Todo list duplicate implementation, but instead of using VueX - deal with local state & signal events to parent for state change -->
 <template>
   <v-container class="todo-list">
     <v-row>
@@ -58,7 +59,10 @@ export default class TodoListStandAlone extends Vue {
   private newTodo = '';
   private color = '';
 
-  @Watch('myTodos', { deep : true})
+  // Deep ensures this function fires on every change in the model. Use with care.
+  // I've added a store watcher that does the same thing which is cleaner since the presentation
+  // layer should not take care of this but left the code here as an example watcher.
+  @Watch('myTodos', { deep : true })
   onChange() {
     this.$store.dispatch('save');
   }
@@ -76,12 +80,14 @@ export default class TodoListStandAlone extends Vue {
   
   @Emit()
   toggleCompleted(index: number) {
-    // No implementation needed
+    // No implementation needed. Index will be available as $event in the parent template.
+    // Note that both @toggleCompleted and @toggle-completed are valid ways to listen to this event.
   }
 
   @Emit()
   removeTodo(index: number) {
-    // No implementation needed
+    // No implementation needed. Index will be available as $event in the parent template.
+    // Note that both @removeTodo and @remove-todo are valid ways to listen to this event.
   }
 
   get statusMessage() {

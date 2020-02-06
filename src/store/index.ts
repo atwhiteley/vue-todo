@@ -5,7 +5,10 @@ import { loadTodos, saveTodos } from '@/service/localStorage'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+/**
+ * Disclaimer: In a real world scenario, using VueX for a simple todo app would be overkill.
+ */
+const store = new Vuex.Store({
   strict: true,
   state: {
     myTodos: [] as Todo[],
@@ -50,7 +53,14 @@ export default new Vuex.Store({
       saveTodos(context.state.myTodos);
     }
   }
-})
+});
+
+export default store;
+
+// This is a way of watching state from the store.
+store.watch((state) => state.myTodos, () => {
+  store.dispatch('save');
+});
 
 /**
  * Example custom type guard.

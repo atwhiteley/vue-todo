@@ -1,3 +1,4 @@
+<!-- Groups todo's by color, shows the todos on hover and you have the ability to remove them via the menu -->
 <template>
   <v-container>
     <v-row v-for="grouped in myGroupedTodos" :key="grouped.color">
